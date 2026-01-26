@@ -1,0 +1,11 @@
+# Neovim
+nvim/lazy-lock.json
+nvim/.netrwhist
+
+# macOS
+.DS_Store
+
+# Temporary files
+*.swp
+*.swo
+*~
