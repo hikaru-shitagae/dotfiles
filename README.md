@@ -37,16 +37,17 @@ ln -sf ~/dotfiles/wezterm ~/.config/wezterm
 
 ```
 dotfiles/
-├── nvim/                   # Neovim設定
+├── nvim/                   # Neovim設定（GitHubで管理）
 │   ├── init.lua
 │   └── lua/
 │       └── plugins/
-├── wezterm/                # WezTerm設定
+├── wezterm/                # WezTerm設定（GitHubで管理）
 │   ├── wezterm.lua
 │   └── keybinds.lua
 ├── neovim-cheatsheet.md    # Neovim操作リファレンス
 ├── wezterm-cheatsheet.md   # WezTerm操作リファレンス
 ├── install.sh              # セットアップスクリプト
+├── sync.sh                 # 設定同期スクリプト
 └── README.md
 ```
 
@@ -59,11 +60,39 @@ dotfiles/
 
 ## 管理方法
 
-設定を変更したら、以下のコマンドでGitHubにプッシュします：
+### 設定の同期（推奨）
+
+設定を変更したら、同期スクリプトを実行してGitHubにプッシュします：
 
 ```bash
+~/dotfiles/sync.sh
+```
+
+このスクリプトは以下を自動的に行います：
+1. `~/.config/nvim` と `~/.config/wezterm` から最新の設定をコピー
+2. 変更内容を表示
+3. コミットメッセージを入力
+4. GitHubにプッシュ
+
+### 手動で同期する場合
+
+```bash
+# Neovim設定をコピー
+rsync -av --delete --exclude='lazy-lock.json' ~/.config/nvim/ ~/dotfiles/nvim/
+
+# WezTerm設定をコピー
+rsync -av --delete ~/.config/wezterm/ ~/dotfiles/wezterm/
+
+# Gitにコミット＆プッシュ
 cd ~/dotfiles
 git add .
 git commit -m "Update configuration"
 git push
 ```
+
+### 設定の場所
+
+- **実際に使う設定**: `~/.config/nvim` と `~/.config/wezterm`
+- **GitHubで管理**: `~/dotfiles/nvim` と `~/dotfiles/wezterm`
+
+普段は `~/.config/` 内のファイルを編集し、定期的に `sync.sh` で同期してください。
