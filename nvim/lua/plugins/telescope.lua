@@ -4,6 +4,13 @@ return {
   config = function()
     require('telescope').setup({
       defaults = {
+        -- 隠しファイル・ディレクトリを含める
+        hidden = true,
+        -- .gitディレクトリは除外
+        file_ignore_patterns = {
+          "^%.git/",
+          "node_modules/",
+        },
         -- Treesitterのハイライトエラーを回避
         -- プレビューでシンタックスハイライトを無効化
         preview = {
@@ -12,6 +19,7 @@ return {
       },
       pickers = {
         find_files = {
+          hidden = true,
           preview = {
             treesitter = false,
           },

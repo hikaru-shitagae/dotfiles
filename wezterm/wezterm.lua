@@ -4,6 +4,20 @@ local config = wezterm.config_builder()
 config.automatically_reload_config = true
 config.font_size = 12.0
 config.use_ime = true
+config.font = wezterm.font_with_fallback({
+  {
+    family = "JetBrains Mono",
+    harfbuzz_features = {
+      "calt=0", -- Contextual Alternates (これが!=を変換する主犯)
+      "clig=0", -- Contextual Ligatures
+      "liga=0", -- Standard Ligatures
+    },
+  },
+  -- JetBrains Monoがない場合のフォールバック（Mac標準のMenloなど）
+  "Menlo",
+  "Monaco",
+  "Consolas",
+})
 config.window_background_opacity = 0.85
 config.macos_window_background_blur = 20
 
