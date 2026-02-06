@@ -24,8 +24,8 @@ config.macos_window_background_blur = 20
 ----------------------------------------------------
 -- Tab
 ----------------------------------------------------
--- タイトルバーを非表示
-config.window_decorations = "RESIZE"
+-- タイトルバーを表示（macOSメニューバーの時計を使用）
+config.window_decorations = "TITLE | RESIZE"
 -- タブバーの表示
 config.show_tabs_in_tab_bar = true
 -- タブが一つの時は非表示
@@ -85,6 +85,7 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
     { Text = SOLID_RIGHT_ARROW },
   }
 end)
+
 
 ----------------------------------------------------
 -- keybinds
